@@ -53,8 +53,7 @@ void Output::OutputParticles(Hydrodynamics &hydro, Boundary &boundary,
     char file_name[150], file_list[120];
 	std::cerr << "Output::OutputParticles is called" << std::endl;
 	std::cerr << "Time of the output is " << Time << std::endl;
-if (Time<0.041)
-{}
+ hydro.setTime(Time);
     //produce output file name
     Itime = Time*1.0e6;
     strcpy(file_name,"./outdata/prtl");
@@ -82,7 +81,8 @@ if (Time<0.041)
                 if(j == 1)      out<<"t='"<<hydro.materials[i].material_name<<"' \n";
 				    out<<prtl->R[0]<<"  "<<prtl->R[1]
                   <<"  "<<prtl->U[0]<<"  "<<prtl->U[1]<<"  "<<
-				  prtl->dUdt[0]<<"  "<<prtl->dUdt[1]<<"  "<<prtl->rho<<"\n";
+				  prtl->dUdt[0]<<"  "<<prtl->dUdt[1]<<"  "<<
+                                        prtl->_dU[0]<<"  "<<prtl->_dU[1]<<" "<<prtl->rho<<"\n";
                 //out<<ini.dms_length(prtl->R[0])<<"  "<<ini.dms_length(prtl->R[1])
                   // <<"  "<<ini.dms_velocity(prtl->U[0])<<"  "<<ini.dms_velocity(prtl->U[1])<<
 					//"  "<<prtl->dUdt[0]<<"  "<<prtl->dUdt[1]<<"  "<<
